@@ -9,16 +9,18 @@ const TripAdvisorLogo = () => (
   </svg>
 );
 
-const PlaceCardNew = ({ place }) => {
+const PlaceCardNew = ({ place, index = 0 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <motion.div
-      layout
-      initial={{ opacity: 0, y: 50 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.5 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{
+        duration: 1.2,
+        ease: [0.25, 0.1, 0.25, 1]
+      }}
       className="flex flex-col group bg-white border border-gray-200 shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition-all cursor-pointer dark:bg-[#2d2b3b] dark:border-[#3e3b4e] dark:shadow-neutral-700/70 h-full"
       onClick={() => setIsExpanded(!isExpanded)}
     >

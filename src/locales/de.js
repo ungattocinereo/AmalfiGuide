@@ -11,7 +11,7 @@ export const de = {
             "Taxi rufen",
             "Gepäckhilfe"
         ],
-        stats_number: "14",
+        stats_number: "20",
         stats_text: "wichtige Tipps \nin diesem Guide"
     },
     footer: {

@@ -169,16 +169,16 @@ const Hero = ({ theme, setTheme }) => {
                         <div className="flex flex-col sm:flex-row gap-[1vw] w-full sm:w-auto">
                             <button
                                 onClick={() => scrollToSection('food-section')}
-                                className="px-[2vw] py-[1.5vh] bg-white text-orange-600 rounded-full font-bold shadow-lg hover:bg-orange-50 transition-all transform hover:scale-105 flex items-center justify-center gap-2"
-                                style={{ fontSize: 'clamp(0.9rem, 1.2vh, 1.4rem)' }}
+                                className="px-[2vw] py-[1.5vh] border border-white text-white rounded-full font-bold hover:bg-white/10 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
+                                style={{ fontSize: 'clamp(0.9rem, 1.2vh, 1.4rem)', borderWidth: '1px' }}
                             >
                                 <Utensils size={20} />
                                 {t('hero.cta_food')}
                             </button>
                             <button
                                 onClick={() => scrollToSection('places-section')}
-                                className="px-[2vw] py-[1.5vh] bg-orange-600/20 backdrop-blur-md border border-white/30 text-white rounded-full font-bold shadow-lg hover:bg-orange-600/30 transition-all transform hover:scale-105 flex items-center justify-center gap-2"
-                                style={{ fontSize: 'clamp(0.9rem, 1.2vh, 1.4rem)' }}
+                                className="px-[2vw] py-[1.5vh] border border-white text-white rounded-full font-bold hover:bg-white/10 transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2"
+                                style={{ fontSize: 'clamp(0.9rem, 1.2vh, 1.4rem)', borderWidth: '1px' }}
                             >
                                 <MapPin size={20} />
                                 {t('hero.cta_secrets')}
@@ -190,7 +190,7 @@ const Hero = ({ theme, setTheme }) => {
                     <div className="hidden lg:block col-span-4" />
 
                     {/* Right Column (Span 4 = 1/3) */}
-                    <div className="hidden lg:flex col-span-4 flex-col justify-center items-start text-left pt-[18vh] pointer-events-auto" style={{ transform: 'translateX(15%)' }}>
+                    <div className="hidden lg:flex col-span-4 flex-col justify-center items-start text-left pt-[14vh] pointer-events-auto" style={{ transform: 'translateX(15%) scale(1.1)' }}>
 
                         {/* How we help section */}
                         <div className="mb-[5vh]">
@@ -216,7 +216,7 @@ const Hero = ({ theme, setTheme }) => {
                         {/* Big Number */}
                         <div className="mt-[2vh]">
                             <div
-                                className="leading-none font-bold text-white font-heading drop-shadow-lg"
+                                className="leading-none font-bold text-white font-heading"
                                 style={{ fontSize: 'clamp(7.5rem, 20vh, 20rem)' }}
                             >
                                 {t('hero.stats_number')}

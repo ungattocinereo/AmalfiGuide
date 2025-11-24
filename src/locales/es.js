@@ -11,7 +11,7 @@ export const es = {
             "Pedir un taxi",
             "Ayuda con equipaje"
         ],
-        stats_number: "14",
+        stats_number: "20",
         stats_text: "consejos esenciales \nen esta guía"
     },
     footer: {

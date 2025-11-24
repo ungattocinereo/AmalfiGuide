@@ -11,7 +11,7 @@ export const ru = {
             "Заказать такси",
             "Помочь с багажом"
         ],
-        stats_number: "14",
+        stats_number: "20",
         stats_text: "важных советов \nв этом гиде"
     },
     footer: {

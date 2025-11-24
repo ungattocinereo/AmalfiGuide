@@ -11,7 +11,7 @@ export const en = {
             "Hire a cab",
             "Help with luggage"
         ],
-        stats_number: "14",
+        stats_number: "20",
         stats_text: "essential tips \nin this guide"
     },
     footer: {

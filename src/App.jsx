@@ -78,10 +78,11 @@ const App = () => {
 
                                 {/* Grid Layout for Cards - 2 columns for "Not Only Amalfi" even on mobile */}
                                 <div className={isNotOnlyAmalfi ? "grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"}>
-                                    {category.items.map((place) => (
+                                    {category.items.map((place, index) => (
                                         <PlaceCardNew
                                             key={place.id}
                                             place={place}
+                                            index={index}
                                         // onClick={setSelectedPlace} // Handled internally now
                                         />
                                     ))}
