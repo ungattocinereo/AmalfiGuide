@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Utensils, Globe, Sun, Moon, ChevronDown } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const Hero = ({ theme, setTheme }) => {
-    const [isLangOpen, setIsLangOpen] = useState(false);
-    const [currentLang, setCurrentLang] = useState('EN');
+    const { language, setLanguage, t } = useLanguage();
+    const [isLangOpen, setIsLangOpen] = React.useState(false);
 
     const languages = [
         { code: 'EN', label: 'English' },
@@ -26,18 +27,18 @@ const Hero = ({ theme, setTheme }) => {
     };
 
     return (
-        <section className="relative w-full h-screen bg-[var(--hero-bg)] overflow-hidden">
+        <section className="relative w-full h-screen overflow-hidden transition-colors duration-700 ease-in-out" style={{ backgroundColor: 'var(--hero-bg)' }}>
 
-            {/* Top Right Switchers - Absolute Fixed Position (Z-50) */}
-            <div className="absolute top-6 right-6 z-50 flex items-center gap-4">
+            {/* Top Right Switchers - Fixed Floating Position (Z-50) */}
+            <div className="fixed top-6 right-6 z-50 flex items-center gap-4">
                 {/* Language Switcher */}
                 <div className="relative">
                     <button
                         onClick={() => setIsLangOpen(!isLangOpen)}
-                        className="flex items-center gap-2 px-4 py-2 bg-white/60 dark:bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white font-medium hover:bg-white/70 dark:hover:bg-black/50 transition-all shadow-lg"
+                        className="flex items-center gap-2 px-4 py-2 bg-white/60 dark:bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white font-medium hover:bg-white/70 dark:hover:bg-black/50 transition-all duration-500 shadow-lg"
                     >
                         <Globe size={18} />
-                        <span>{currentLang}</span>
+                        <span>{language}</span>
                         <ChevronDown size={14} className={`transform transition-transform ${isLangOpen ? 'rotate-180' : ''}`} />
                     </button>
 
@@ -53,13 +54,13 @@ const Hero = ({ theme, setTheme }) => {
                                     <button
                                         key={lang.code}
                                         onClick={() => {
-                                            setCurrentLang(lang.code);
+                                            setLanguage(lang.code);
                                             setIsLangOpen(false);
                                         }}
-                                        className={`w-full text-left px-4 py-2 text-sm hover:bg-white/40 dark:hover:bg-white/10 transition-colors flex items-center justify-between ${currentLang === lang.code ? 'text-orange-600 font-bold' : 'text-gray-800 dark:text-gray-200'}`}
+                                        className={`w-full text-left px-4 py-2 text-sm hover:bg-white/40 dark:hover:bg-white/10 transition-colors flex items-center justify-between ${language === lang.code ? 'text-orange-600 font-bold' : 'text-gray-800 dark:text-gray-200'}`}
                                     >
                                         {lang.label}
-                                        {currentLang === lang.code && <div className="w-1.5 h-1.5 rounded-full bg-orange-600" />}
+                                        {language === lang.code && <div className="w-1.5 h-1.5 rounded-full bg-orange-600" />}
                                     </button>
                                 ))}
                             </motion.div>
@@ -70,7 +71,7 @@ const Hero = ({ theme, setTheme }) => {
                 {/* Theme Switcher */}
                 <button
                     onClick={toggleTheme}
-                    className="p-2 bg-white/60 dark:bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white hover:bg-white/70 dark:hover:bg-black/50 transition-all shadow-lg"
+                    className="p-2 bg-white/60 dark:bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white hover:bg-white/70 dark:hover:bg-black/50 transition-all duration-500 shadow-lg"
                     aria-label="Toggle Theme"
                 >
                     {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
@@ -83,10 +84,14 @@ const Hero = ({ theme, setTheme }) => {
       ================================================================= */}
             <div className="absolute inset-0 z-0 flex items-end justify-center pointer-events-none">
 
-                {/* Glow */}
+                {/* Glow - uses CSS variable for color */}
                 <div
-                    className="absolute bottom-0 bg-[radial-gradient(ellipse_at_bottom,_#FFBE00_0%,_transparent_70%)] opacity-80"
-                    style={{ width: '120vw', height: '70vh' }}
+                    className="absolute bottom-0 opacity-80 transition-all duration-700 ease-in-out"
+                    style={{
+                        width: '120vw',
+                        height: '70vh',
+                        background: `radial-gradient(ellipse at bottom, var(--hero-glow) 0%, transparent 70%)`
+                    }}
                 />
 
                 {/* Central Image */}
@@ -125,13 +130,12 @@ const Hero = ({ theme, setTheme }) => {
                 }}
             >
                 <h1
-                    className="font-heading font-bold text-white leading-[0.9] drop-shadow-sm"
+                    className="font-heading font-bold text-white leading-[0.9] drop-shadow-sm whitespace-pre-line"
                     style={{
                         fontSize: 'clamp(4.6rem, 13vh, 14rem)',
                     }}
                 >
-                    Amalfi <br />
-                    in a pocket:
+                    {t('hero.title')}
                 </h1>
             </motion.div>
 
@@ -151,16 +155,15 @@ const Hero = ({ theme, setTheme }) => {
                                 className="text-gray-900 font-bold tracking-wide font-heading"
                                 style={{ fontSize: 'clamp(0.9rem, 1.5vh, 1.8rem)' }}
                             >
-                                Secrets • Food • Insights
+                                {t('hero.pill')}
                             </span>
                         </div>
 
                         <p
-                            className="text-white/90 font-body leading-relaxed mb-[4vh]"
+                            className="text-white/90 font-body leading-relaxed mb-[4vh] whitespace-pre-line"
                             style={{ fontSize: 'clamp(1rem, 1.8vh, 2rem)' }}
                         >
-                            Your curated, bite-sized guide to the Amalfi Coast. <br />
-                            Everything you need — right at your fingertips.
+                            {t('hero.subtitle')}
                         </p>
 
                         <div className="flex flex-col sm:flex-row gap-[1vw] w-full sm:w-auto">
@@ -170,7 +173,7 @@ const Hero = ({ theme, setTheme }) => {
                                 style={{ fontSize: 'clamp(0.9rem, 1.2vh, 1.4rem)' }}
                             >
                                 <Utensils size={20} />
-                                Explore Food Tips
+                                {t('hero.cta_food')}
                             </button>
                             <button
                                 onClick={() => scrollToSection('places-section')}
@@ -178,7 +181,7 @@ const Hero = ({ theme, setTheme }) => {
                                 style={{ fontSize: 'clamp(0.9rem, 1.2vh, 1.4rem)' }}
                             >
                                 <MapPin size={20} />
-                                Local Secrets
+                                {t('hero.cta_secrets')}
                             </button>
                         </div>
                     </div>
@@ -187,18 +190,18 @@ const Hero = ({ theme, setTheme }) => {
                     <div className="hidden lg:block col-span-4" />
 
                     {/* Right Column (Span 4 = 1/3) */}
-                    <div className="hidden lg:flex col-span-4 flex-col justify-center items-end text-right pt-[20vh] pointer-events-auto">
+                    <div className="hidden lg:flex col-span-4 flex-col justify-center items-start text-left pt-[18vh] pointer-events-auto" style={{ transform: 'translateX(15%)' }}>
 
                         {/* How we help section */}
                         <div className="mb-[5vh]">
                             <h3
-                                className="font-heading font-bold text-white mb-[2vh] drop-shadow-md"
+                                className="font-heading font-bold text-white mb-[2vh] drop-shadow-md whitespace-pre-line"
                                 style={{ fontSize: 'clamp(1.5rem, 2.8vh, 3.2rem)' }}
                             >
-                                How we can make <br /> your stay easier
+                                {t('hero.help_title')}
                             </h3>
                             <ul className="space-y-[1vh]">
-                                {['Book a restaurant', 'Hire a cab', 'Help with luggage'].map((item, i) => (
+                                {t('hero.help_items').map((item, i) => (
                                     <li
                                         key={i}
                                         className="text-white/80 border-b border-white/20 pb-[0.5vh] last:border-0 drop-shadow-sm"
@@ -216,13 +219,13 @@ const Hero = ({ theme, setTheme }) => {
                                 className="leading-none font-bold text-white font-heading drop-shadow-lg"
                                 style={{ fontSize: 'clamp(7.5rem, 20vh, 20rem)' }}
                             >
-                                14
+                                {t('hero.stats_number')}
                             </div>
                             <div
-                                className="text-white/90 font-light border-t border-white/30 pt-[1vh] mt-[1vh] inline-block drop-shadow-md"
+                                className="text-white/90 font-light border-t border-white/30 pt-[1vh] mt-[1vh] inline-block drop-shadow-md whitespace-pre-line"
                                 style={{ fontSize: 'clamp(1.25rem, 2.3vh, 2.5rem)' }}
                             >
-                                essential tips <br /> in this guide
+                                {t('hero.stats_text')}
                             </div>
                         </div>
                     </div>

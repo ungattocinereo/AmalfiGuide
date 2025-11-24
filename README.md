@@ -8,9 +8,14 @@ A modern, curated travel guide for the Amalfi Coast, focusing on authentic exper
 -   **Interactive Cards**:
     -   **Toggle View**: Click on any card to switch between "Gregory's Take" (personal expert advice) and a full detailed description.
     -   **Rich Metadata**: Each card displays categories, TripAdvisor ratings, review counts, and quick tags.
+-   **Internationalization (i18n)**:
+    -   **Multi-Language Support**: Instant switching between English, Spanish, French, German, and Russian.
+    -   **Localized Content**: All place descriptions, tags, and categories are fully translated.
+    -   **Context-Based State**: Global language state managed via React Context.
 -   **Responsive Design**:
     -   **Mobile-First**: Optimized for all devices, from mobile phones to large desktop screens.
     -   **Adaptive Typography**: Section headers and text scale smoothly across viewports.
+    -   **Redesigned Hero**: Immersive hero section with dynamic glow effects and responsive layout.
 -   **Dark Mode**: Fully supported dark theme inspired by macOS Tahoe (Deep Purple/Black aesthetics).
 -   **Performance**: Built with Vite for lightning-fast development and production builds.
 
@@ -18,6 +23,7 @@ A modern, curated travel guide for the Amalfi Coast, focusing on authentic exper
 
 -   **Framework**: [React](https://reactjs.org/) (v18)
 -   **Build Tool**: [Vite](https://vitejs.dev/)
+-   **State Management**: React Context API (for Language and Theme)
 -   **Styling**:
     -   [Tailwind CSS](https://tailwindcss.com/) (v3.4) for utility-first styling.
     -   Custom CSS variables for theming.
@@ -78,7 +84,7 @@ npm run preview
 
 -   **Colors**:
     -   Primary Brand: Warm Orange / Terracotta (`#e67e22`)
-    -   Dark Mode Background: `#22212f`
+    -   Dark Mode Background: `#1D1C27` (Refined Dark Theme)
     -   Dark Mode Card: `#2d2b3b`
 -   **Typography**:
     -   Headings: *Merriweather* (Serif)
@@ -89,8 +95,10 @@ npm run preview
 
 ```
 src/
-├── components/        # Reusable UI components (Hero, PlaceCardNew, etc.)
-├── data/             # Static data files (places_new.js)
+├── components/        # Reusable UI components (Hero, PlaceCardNew, Footer, etc.)
+├── context/          # Global state contexts (LanguageContext)
+├── data/             # Localized data functions (places_new.js)
+├── locales/          # Translation files (en.js, es.js, etc.)
 ├── styles/           # Global styles and Tailwind directives
 ├── App.jsx           # Main application component
 └── main.jsx          # Entry point

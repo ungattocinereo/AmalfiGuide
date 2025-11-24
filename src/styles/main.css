@@ -19,11 +19,15 @@
   /* Typography */
   --font-heading: 'Merriweather', serif;
   --font-body: 'Outfit', sans-serif;
+
+  /* Hero Light Theme */
+  --hero-bg: #F85600;
+  --hero-glow: #FFBE00;
 }
 
 [data-theme='dark'] {
   /* Night Mode - macOS Tahoe inspired */
-  --bg-color: #22212f;
+  --bg-color: #1D1C27;
   /* Deep purple/black */
   --text-color: #ecf0f1;
   --card-bg: #2d2b3b;
@@ -33,11 +37,10 @@
   --secondary-color: #0f3460;
   --border-color: #3e3b4e;
   --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
-}
 
-:root {
-  --hero-bg: #F85600;
-  --sun-color: #FFBF00;
+  /* Hero Dark Theme */
+  --hero-bg: #9C0000;
+  --hero-glow: #FF9A00;
 }
 
 * {
@@ -50,7 +53,7 @@ body {
   font-family: var(--font-body);
   background-color: var(--bg-color);
   color: var(--text-color);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.6s ease, color 0.6s ease;
   -webkit-font-smoothing: antialiased;
 }
 

@@ -1,6 +1,9 @@
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 const Footer = () => {
+    const { t } = useLanguage();
+
     return (
         <footer style={{
             textAlign: 'center',
@@ -12,9 +15,9 @@ const Footer = () => {
             backgroundColor: 'var(--bg-color)',
             color: 'var(--text-color)'
         }}>
-            <p>&copy; {new Date().getFullYear()} Amalfi.Day Guide. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} {t('footer.copyright')}</p>
             <p style={{ marginTop: '10px' }}>
-                Made with ❤️ for Amalfi lovers.
+                {t('footer.made_with')}
             </p>
         </footer>
     );
