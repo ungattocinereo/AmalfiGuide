@@ -36,5 +36,24 @@ export const en = {
             highlight: "Not Only",
             suffix: "Amalfi"
         }
+    },
+    useful_links: {
+        title: "Useful Links & Services",
+        bus: {
+            title: "Bus Timetables",
+            desc: "SITA Sud schedules"
+        },
+        ferry: {
+            title: "Ferry Timetables",
+            desc: "Travel by sea"
+        },
+        path_gods: {
+            title: "Bus to Path of the Gods",
+            desc: "Amalfi - Agerola line"
+        },
+        photoshoot: {
+            title: "Greg's Photoshootings",
+            desc: "Capture your memories"
+        }
     }
 };

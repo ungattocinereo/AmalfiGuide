@@ -36,5 +36,24 @@ export const de = {
             highlight: "Nicht Nur",
             suffix: "Amalfi"
         }
+    },
+    useful_links: {
+        title: "Nützliche Links & Dienste",
+        bus: {
+            title: "Busfahrpläne",
+            desc: "SITA Sud Fahrpläne"
+        },
+        ferry: {
+            title: "Fährfahrpläne",
+            desc: "Reisen auf dem Seeweg"
+        },
+        path_gods: {
+            title: "Bus zum Pfad der Götter",
+            desc: "Linie Amalfi - Agerola"
+        },
+        photoshoot: {
+            title: "Fotoshootings mit Greg",
+            desc: "Halten Sie Ihre Erinnerungen fest"
+        }
     }
 };

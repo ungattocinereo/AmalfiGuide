@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Hero from './components/Hero';
 import PlaceCardNew from './components/PlaceCardNew';
+import UsefulLinks from './components/UsefulLinks';
 // import PlaceModal from './components/PlaceModal'; // Modal no longer needed
 import Footer from './components/Footer';
 import './styles/main.css';
@@ -64,31 +65,33 @@ const App = () => {
                     };
 
                     return (
-                        <section
-                            key={category.id}
-                            id={category.id === 'food' ? 'food-section' : 'places-section'}
-                            className="category-section py-16 px-4"
-                        >
-                            <div className="container mx-auto max-w-7xl">
-                                <div className="flex items-center justify-start mb-12">
-                                    <h2 className="text-4xl md:text-6xl lg:text-[85px] font-bold text-left font-heading text-gray-900 dark:text-white relative inline-block leading-tight">
-                                        {renderCategoryTitle(category.id)}
-                                    </h2>
-                                </div>
+                        <React.Fragment key={category.id}>
+                            {category.id === 'hiking' && <UsefulLinks />}
+                            <section
+                                id={category.id === 'food' ? 'food-section' : 'places-section'}
+                                className="category-section py-16 px-4"
+                            >
+                                <div className="container mx-auto max-w-7xl">
+                                    <div className="flex items-center justify-start mb-12">
+                                        <h2 className="text-4xl md:text-6xl lg:text-[85px] font-bold text-left font-heading text-gray-900 dark:text-white relative inline-block leading-tight">
+                                            {renderCategoryTitle(category.id)}
+                                        </h2>
+                                    </div>
 
-                                {/* Grid Layout for Cards - 2 columns for "Not Only Amalfi" even on mobile */}
-                                <div className={isNotOnlyAmalfi ? "grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"}>
-                                    {category.items.map((place, index) => (
-                                        <PlaceCardNew
-                                            key={place.id}
-                                            place={place}
-                                            index={index}
-                                        // onClick={setSelectedPlace} // Handled internally now
-                                        />
-                                    ))}
+                                    {/* Grid Layout for Cards - 2 columns for "Not Only Amalfi" even on mobile */}
+                                    <div className={isNotOnlyAmalfi ? "grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"}>
+                                        {category.items.map((place, index) => (
+                                            <PlaceCardNew
+                                                key={place.id}
+                                                place={place}
+                                                index={index}
+                                            // onClick={setSelectedPlace} // Handled internally now
+                                            />
+                                        ))}
+                                    </div>
                                 </div>
-                            </div>
-                        </section>
+                            </section>
+                        </React.Fragment>
                     );
                 })}
             </main>
@@ -102,7 +105,7 @@ const App = () => {
                     onClose={() => setSelectedPlace(null)}
                 />
             )} */}
-        </div>
+        </div >
     );
 };
 

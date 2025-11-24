@@ -36,5 +36,24 @@ export const fr = {
             highlight: "Pas Seulement",
             suffix: "Amalfi"
         }
+    },
+    useful_links: {
+        title: "Liens Utiles et Services",
+        bus: {
+            title: "Horaires des Bus",
+            desc: "Horaires SITA Sud"
+        },
+        ferry: {
+            title: "Horaires des Ferries",
+            desc: "Voyager par mer"
+        },
+        path_gods: {
+            title: "Bus pour le Sentier des Dieux",
+            desc: "Ligne Amalfi - Agerola"
+        },
+        photoshoot: {
+            title: "Séances Photo avec Greg",
+            desc: "Capturez vos souvenirs"
+        }
     }
 };
