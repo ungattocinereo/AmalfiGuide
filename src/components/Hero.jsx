@@ -1,8 +1,19 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { MapPin, Utensils } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin, Utensils, Globe, Sun, Moon, ChevronDown } from 'lucide-react';
 
-const Hero = () => {
+const Hero = ({ theme, setTheme }) => {
+    const [isLangOpen, setIsLangOpen] = useState(false);
+    const [currentLang, setCurrentLang] = useState('EN');
+
+    const languages = [
+        { code: 'EN', label: 'English' },
+        { code: 'ES', label: 'Español' },
+        { code: 'FR', label: 'Français' },
+        { code: 'DE', label: 'Deutsch' },
+        { code: 'RU', label: 'Русский' },
+    ];
+
     const scrollToSection = (id) => {
         const element = document.getElementById(id);
         if (element) {
@@ -10,247 +21,216 @@ const Hero = () => {
         }
     };
 
+    const toggleTheme = () => {
+        setTheme(theme === 'light' ? 'dark' : 'light');
+    };
+
     return (
-        <div style={{
-            minHeight: '100vh',
-            width: '100%',
-            backgroundColor: 'var(--hero-bg)',
-            color: '#fff',
-            display: 'flex',
-            flexDirection: 'column',
-            overflow: 'hidden',
-            position: 'relative'
-        }}>
+        <section className="relative w-full h-screen bg-[var(--hero-bg)] overflow-hidden">
 
-            {/* Top-Left Darkening Effect */}
-            <motion.div
-                animate={{
-                    backgroundPosition: ['0% 0%', '100% 100%', '0% 0%'],
-                    opacity: [0.7, 0.9, 0.7]
-                }}
-                transition={{
-                    duration: 15,
-                    repeat: Infinity,
-                    ease: "linear"
-                }}
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '60%',
-                    height: '60%',
-                    background: 'radial-gradient(circle at top left, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 40%, transparent 70%)',
-                    zIndex: 1,
-                    pointerEvents: 'none',
-                }}
-            />
-
-            {/* Main Content Container */}
-            <div style={{
-                flex: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                maxWidth: '100%', // Full width
-                margin: '0 auto',
-                width: '100%',
-                padding: '0', // Remove padding to allow edge-to-edge
-                // Desktop: Row, Mobile: Column
-                '@media (min-width: 768px)': {
-                    flexDirection: 'row',
-                    alignItems: 'stretch' // Stretch to fill height
-                }
-            }} className="hero-container">
-
-                {/* Left Side: Text & Tags */}
-                <div className="hero-text" style={{
-                    flex: 1,
-                    zIndex: 10,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    padding: '40px 40px 40px 60px' // Restore padding, extra left for effect balance
-                }}>
-                    <motion.h1
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        style={{
-                            fontSize: 'clamp(2.5rem, 5vw, 4.5rem)',
-                            lineHeight: '1.1',
-                            fontFamily: 'var(--font-heading)',
-                            fontWeight: '700',
-                            marginBottom: '20px'
-                        }}
+            {/* Top Right Switchers - Absolute Fixed Position (Z-50) */}
+            <div className="absolute top-6 right-6 z-50 flex items-center gap-4">
+                {/* Language Switcher */}
+                <div className="relative">
+                    <button
+                        onClick={() => setIsLangOpen(!isLangOpen)}
+                        className="flex items-center gap-2 px-4 py-2 bg-white/60 dark:bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white font-medium hover:bg-white/70 dark:hover:bg-black/50 transition-all shadow-lg"
                     >
-                        Amalfi in a pocket:<br />
-                        <span style={{ opacity: 0.9 }}>Secrets. Food. Insights.</span>
-                    </motion.h1>
+                        <Globe size={18} />
+                        <span>{currentLang}</span>
+                        <ChevronDown size={14} className={`transform transition-transform ${isLangOpen ? 'rotate-180' : ''}`} />
+                    </button>
 
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        style={{
-                            fontSize: '1.1rem',
-                            lineHeight: '1.6',
-                            maxWidth: '500px',
-                            marginBottom: '30px',
-                            opacity: 0.9
-                        }}
-                    >
-                        Welcome to the Amalfi Coast! Thanks for staying with us at Amalfi.day B&B. Here’s a curated selection of tips and recommendations from Greg, to help you explore like a local.
-                    </motion.p>
-
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4 }}
-                        style={{ display: 'flex', gap: '15px', flexWrap: 'wrap' }}
-                    >
-                        <button
-                            onClick={() => scrollToSection('places-section')}
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                                padding: '12px 24px',
-                                background: 'rgba(255,255,255,0.2)',
-                                backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(255,255,255,0.4)',
-                                borderRadius: '30px',
-                                color: '#fff',
-                                fontSize: '1.1rem',
-                                fontWeight: '600',
-                                cursor: 'pointer',
-                                transition: 'transform 0.2s'
-                            }}
-                            onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                            onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                        >
-                            <MapPin size={20} />
-                            Places
-                        </button>
-
-                        <button
-                            onClick={() => scrollToSection('food-section')}
-                            style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '8px',
-                                padding: '12px 24px',
-                                background: 'rgba(255,255,255,0.2)',
-                                backdropFilter: 'blur(10px)',
-                                border: '1px solid rgba(255,255,255,0.4)',
-                                borderRadius: '30px',
-                                color: '#fff',
-                                fontSize: '1.1rem',
-                                fontWeight: '600',
-                                cursor: 'pointer',
-                                transition: 'transform 0.2s'
-                            }}
-                            onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
-                            onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                        >
-                            <Utensils size={20} />
-                            Food
-                        </button>
-                    </motion.div>
+                    <AnimatePresence>
+                        {isLangOpen && (
+                            <motion.div
+                                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                                className="absolute top-full right-0 mt-2 w-40 bg-white/60 dark:bg-black/60 backdrop-blur-xl border border-white/20 rounded-2xl shadow-xl overflow-hidden py-2"
+                            >
+                                {languages.map((lang) => (
+                                    <button
+                                        key={lang.code}
+                                        onClick={() => {
+                                            setCurrentLang(lang.code);
+                                            setIsLangOpen(false);
+                                        }}
+                                        className={`w-full text-left px-4 py-2 text-sm hover:bg-white/40 dark:hover:bg-white/10 transition-colors flex items-center justify-between ${currentLang === lang.code ? 'text-orange-600 font-bold' : 'text-gray-800 dark:text-gray-200'}`}
+                                    >
+                                        {lang.label}
+                                        {currentLang === lang.code && <div className="w-1.5 h-1.5 rounded-full bg-orange-600" />}
+                                    </button>
+                                ))}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </div>
 
-                {/* Right Side: Image & Sun Animation */}
-                <div className="hero-image-container" style={{
-                    flex: 1,
-                    position: 'relative',
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                    alignItems: 'flex-end',
-                    height: '100%',
-                    minHeight: '50vh',
-                    overflow: 'hidden' // Ensure sun doesn't cause scrollbars
-                }}>
-                    {/* Sun Animation */}
-                    <motion.div
-                        animate={{
-                            scale: [0.9, 1.2, 0.9],
-                            opacity: [0.5, 0.8, 0.5]
-                        }}
-                        transition={{
-                            duration: 6,
-                            repeat: Infinity,
-                            ease: "easeInOut"
-                        }}
-                        style={{
-                            position: 'absolute',
-                            width: '500px',
-                            height: '500px',
-                            background: 'var(--sun-color)',
-                            borderRadius: '50%',
-                            filter: 'blur(80px)',
-                            zIndex: 0,
-                            bottom: '-100px',
-                            right: '-100px',
-                        }}
-                    />
+                {/* Theme Switcher */}
+                <button
+                    onClick={toggleTheme}
+                    className="p-2 bg-white/60 dark:bg-black/40 backdrop-blur-xl border border-white/20 rounded-full text-white hover:bg-white/70 dark:hover:bg-black/50 transition-all shadow-lg"
+                    aria-label="Toggle Theme"
+                >
+                    {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+                </button>
+            </div>
 
-                    {/* Hero Image */}
-                    <motion.img
-                        initial={{ opacity: 0, scale: 0.9, y: 50 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        transition={{ duration: 1 }}
-                        src="https://amalfi.day/wp-content/uploads/2023/03/2-atrani-new-photos-aquarelle.webp"
+            {/* =================================================================
+         LAYER 1: Background Container (Glow + Image) - Z-0
+         Strictly centered relative to the Hero section.
+      ================================================================= */}
+            <div className="absolute inset-0 z-0 flex items-end justify-center pointer-events-none">
+
+                {/* Glow */}
+                <div
+                    className="absolute bottom-0 bg-[radial-gradient(ellipse_at_bottom,_#FFBE00_0%,_transparent_70%)] opacity-80"
+                    style={{ width: '120vw', height: '70vh' }}
+                />
+
+                {/* Central Image */}
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 0.2 }}
+                    className="relative z-10"
+                    style={{ height: '90vh' }}
+                >
+                    <img
+                        src="/hero-atrani.webp"
                         alt="Amalfi Coast Watercolor"
+                        className="h-full w-auto object-contain object-bottom"
                         style={{
-                            width: 'auto',
-                            maxWidth: '100%',
-                            maxHeight: '90vh', // Prevent it from being too tall on huge screens
-                            height: 'auto',
-                            objectFit: 'contain',
-                            zIndex: 1,
-                            display: 'block', // Remove inline spacing
-                            marginBottom: '0' // Force flush
+                            maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+                            WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)'
                         }}
                     />
+                </motion.div>
+            </div>
+
+            {/* =================================================================
+         LAYER 3: Headline Overlay - Z-40
+         Spans the first 2/3 of the screen, independent of the grid below.
+      ================================================================= */}
+            <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+                className="absolute z-40 pointer-events-none"
+                style={{
+                    top: '18vh',
+                    left: '5vw',
+                    width: '60vw', // Spans approx 2/3
+                }}
+            >
+                <h1
+                    className="font-heading font-bold text-white leading-[0.9] drop-shadow-sm"
+                    style={{
+                        fontSize: 'clamp(4.6rem, 13vh, 14rem)',
+                    }}
+                >
+                    Amalfi <br />
+                    in a pocket:
+                </h1>
+            </motion.div>
+
+            {/* =================================================================
+         LAYER 2: Content Grid (3 Columns) - Z-30
+         1/3 Left (Text), 1/3 Center (Empty), 1/3 Right (Stats)
+      ================================================================= */}
+            <div className="absolute inset-0 z-30 pointer-events-none">
+                <div className="w-full h-full max-w-[1800px] mx-auto grid grid-cols-12 px-[5vw]">
+
+                    {/* Left Column (Span 4 = 1/3) */}
+                    <div className="col-span-12 lg:col-span-4 flex flex-col justify-center items-start pt-[30vh] pointer-events-auto">
+
+                        {/* Yellow Tag Pill */}
+                        <div className="inline-block px-[1.5vw] py-[0.8vh] bg-yellow-400 rounded-full mb-[3vh] shadow-md transform -rotate-1">
+                            <span
+                                className="text-gray-900 font-bold tracking-wide font-heading"
+                                style={{ fontSize: 'clamp(0.9rem, 1.5vh, 1.8rem)' }}
+                            >
+                                Secrets • Food • Insights
+                            </span>
+                        </div>
+
+                        <p
+                            className="text-white/90 font-body leading-relaxed mb-[4vh]"
+                            style={{ fontSize: 'clamp(1rem, 1.8vh, 2rem)' }}
+                        >
+                            Your curated, bite-sized guide to the Amalfi Coast. <br />
+                            Everything you need — right at your fingertips.
+                        </p>
+
+                        <div className="flex flex-col sm:flex-row gap-[1vw] w-full sm:w-auto">
+                            <button
+                                onClick={() => scrollToSection('food-section')}
+                                className="px-[2vw] py-[1.5vh] bg-white text-orange-600 rounded-full font-bold shadow-lg hover:bg-orange-50 transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+                                style={{ fontSize: 'clamp(0.9rem, 1.2vh, 1.4rem)' }}
+                            >
+                                <Utensils size={20} />
+                                Explore Food Tips
+                            </button>
+                            <button
+                                onClick={() => scrollToSection('places-section')}
+                                className="px-[2vw] py-[1.5vh] bg-orange-600/20 backdrop-blur-md border border-white/30 text-white rounded-full font-bold shadow-lg hover:bg-orange-600/30 transition-all transform hover:scale-105 flex items-center justify-center gap-2"
+                                style={{ fontSize: 'clamp(0.9rem, 1.2vh, 1.4rem)' }}
+                            >
+                                <MapPin size={20} />
+                                Local Secrets
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Center Column (Span 4 = 1/3) - Empty for Image */}
+                    <div className="hidden lg:block col-span-4" />
+
+                    {/* Right Column (Span 4 = 1/3) */}
+                    <div className="hidden lg:flex col-span-4 flex-col justify-center items-end text-right pt-[20vh] pointer-events-auto">
+
+                        {/* How we help section */}
+                        <div className="mb-[5vh]">
+                            <h3
+                                className="font-heading font-bold text-white mb-[2vh] drop-shadow-md"
+                                style={{ fontSize: 'clamp(1.5rem, 2.8vh, 3.2rem)' }}
+                            >
+                                How we can make <br /> your stay easier
+                            </h3>
+                            <ul className="space-y-[1vh]">
+                                {['Book a restaurant', 'Hire a cab', 'Help with luggage'].map((item, i) => (
+                                    <li
+                                        key={i}
+                                        className="text-white/80 border-b border-white/20 pb-[0.5vh] last:border-0 drop-shadow-sm"
+                                        style={{ fontSize: 'clamp(1.1rem, 1.9vh, 2rem)' }}
+                                    >
+                                        – {item}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Big Number */}
+                        <div className="mt-[2vh]">
+                            <div
+                                className="leading-none font-bold text-white font-heading drop-shadow-lg"
+                                style={{ fontSize: 'clamp(7.5rem, 20vh, 20rem)' }}
+                            >
+                                14
+                            </div>
+                            <div
+                                className="text-white/90 font-light border-t border-white/30 pt-[1vh] mt-[1vh] inline-block drop-shadow-md"
+                                style={{ fontSize: 'clamp(1.25rem, 2.3vh, 2.5rem)' }}
+                            >
+                                essential tips <br /> in this guide
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-            <style>{`
-        @media (min-width: 768px) {
-          .hero-container {
-            flex-direction: row !important;
-            text-align: left;
-            align-items: stretch !important; 
-          }
-          .hero-text {
-            align-items: flex-start !important;
-            justify-content: center;
-            padding-left: 80px !important; /* More space on desktop */
-          }
-          .hero-image-container {
-             align-items: flex-end !important;
-             justify-content: flex-end !important;
-          }
-        }
-        @media (max-width: 767px) {
-          .hero-container {
-            flex-direction: column;
-            text-align: center;
-          }
-          .hero-text {
-            align-items: center;
-            margin-bottom: 20px;
-            padding: 40px 20px !important;
-          }
-          .hero-image-container {
-            justify-content: center !important;
-            align-items: flex-end;
-          }
-          .hero-image-container img {
-            max-width: 120% !important; /* Allow slight overflow on mobile if needed */
-            margin-bottom: 0;
-          }
-        }
-      `}</style>
-        </div>
+        </section>
     );
 };
 

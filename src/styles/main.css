@@ -1,4 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
+
   /* Light Mode (Day) */
   --bg-color: #fdfbf7;
   /* Warm off-white */
@@ -12,20 +17,21 @@
   --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
   /* Typography */
-  --font-heading: 'Playfair Display', serif;
+  --font-heading: 'Merriweather', serif;
   --font-body: 'Outfit', sans-serif;
 }
 
 [data-theme='dark'] {
-  /* Night Mode */
-  --bg-color: #1a1a2e;
-  /* Deep blue/black */
+  /* Night Mode - macOS Tahoe inspired */
+  --bg-color: #22212f;
+  /* Deep purple/black */
   --text-color: #ecf0f1;
-  --card-bg: #16213e;
+  --card-bg: #2d2b3b;
+  /* Slightly lighter than bg */
   --accent-color: #f1c40f;
   /* Moon yellow */
   --secondary-color: #0f3460;
-  --border-color: #2c3e50;
+  --border-color: #3e3b4e;
   --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
 }
 
