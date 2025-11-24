@@ -147,13 +147,13 @@ const Hero = ({ theme, setTheme }) => {
                 <div className="w-full h-full max-w-[1800px] mx-auto grid grid-cols-12 px-[5vw]">
 
                     {/* Left Column (Span 4 = 1/3) */}
-                    <div className="col-span-12 lg:col-span-4 flex flex-col justify-center items-start pt-[30vh] pointer-events-auto">
+                    <div className="col-span-12 lg:col-span-4 flex flex-col justify-center items-start pt-[26vh] pointer-events-auto">
 
                         {/* Yellow Tag Pill */}
-                        <div className="inline-block px-[1.5vw] py-[0.8vh] bg-yellow-400 rounded-full mb-[3vh] shadow-md transform -rotate-1">
+                        <div className="inline-block px-[2.25vw] py-[1.2vh] bg-yellow-400 rounded-full mb-[3vh] shadow-md transform -rotate-1">
                             <span
                                 className="text-gray-900 font-bold tracking-wide font-heading"
-                                style={{ fontSize: 'clamp(0.9rem, 1.5vh, 1.8rem)' }}
+                                style={{ fontSize: 'clamp(1.35rem, 2.25vh, 2.7rem)' }}
                             >
                                 {t('hero.pill')}
                             </span>
